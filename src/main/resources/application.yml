@@ -4,8 +4,8 @@ spring:
 
     datasource:
         url: jdbc:mysql://localhost:3306/ecompaymentdb
-        username: root
-        password: Deepak@87083
+        username: ****
+        password: ***********
 
     jpa:
         hibernate:
