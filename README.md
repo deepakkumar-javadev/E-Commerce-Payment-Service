@@ -178,6 +178,112 @@ The general flow is:
 
 ---
 
+## Configuration
+
+Before running the Payment Service, the client needs to configure the required **Razorpay credentials and MySQL database credentials** in the `application.yml` file.
+
+### Required Configuration
+
+The following values need to be provided:
+
+* Razorpay **Key ID**
+* Razorpay **Key Secret**
+* Razorpay **Webhook Secret**
+* MySQL **Database Username**
+* MySQL **Database Password**
+* MySQL Database URL
+* Kafka configuration
+* Eureka Server URL
+
+### Example `application.yml`
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecompaymentdb
+    username: YOUR_DB_USERNAME
+    password: YOUR_DB_PASSWORD
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+razorpay:
+  key:
+    id: YOUR_RAZORPAY_KEY_ID
+    secret: YOUR_RAZORPAY_KEY_SECRET
+
+  webhook:
+    secret: YOUR_RAZORPAY_WEBHOOK_SECRET
+
+server:
+  port: 8087
+```
+
+> **Important:** Replace the placeholder values with your own credentials before running the application.
+
+### Razorpay Credentials
+
+The client needs to create/configure a Razorpay account and provide:
+
+```text
+Razorpay Key ID       → YOUR_RAZORPAY_KEY_ID
+Razorpay Key Secret   → YOUR_RAZORPAY_KEY_SECRET
+Webhook Secret        → YOUR_RAZORPAY_WEBHOOK_SECRET
+```
+
+These credentials are required for online payment processing and webhook verification.
+
+### Database Credentials
+
+The client also needs to provide their own MySQL credentials:
+
+```text
+Database Name: ecompaymentdb
+Username:      YOUR_DB_USERNAME
+Password:      YOUR_DB_PASSWORD
+```
+
+The database must be available before starting the Payment Service.
+
+---
+
+## Security Note
+
+**Never commit real credentials or secrets to GitHub.**
+
+Do not add actual values for:
+
+```text
+Razorpay Key Secret
+Razorpay Webhook Secret
+Database Password
+JWT Secret
+```
+
+Use environment variables or a local configuration file for sensitive values.
+
+For example:
+
+```yaml
+spring:
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+razorpay:
+  key:
+    id: ${RAZORPAY_KEY_ID}
+    secret: ${RAZORPAY_KEY_SECRET}
+
+  webhook:
+    secret: ${RAZORPAY_WEBHOOK_SECRET}
+```
+
+Then configure these values in the client's local environment.
+
+---
+
 ## Database
 
 Payment information is stored in MySQL.
@@ -237,7 +343,7 @@ The Payment Service communicates with other services as part of the e-commerce w
                  MySQL           Razorpay
                     │
                     ▼
-                 Kafka
+                  Kafka
 ```
 
 ---
@@ -346,6 +452,9 @@ Payment Created
 
 ---
 
-## Tech stack used : 
+## Tech Stack Used
 
-Java | Spring Boot | Microservices | REST APIs | MySQL | Kafka | Docker
+**Java | Spring Boot | Microservices | REST APIs | Spring Data JPA | MySQL | Kafka | Razorpay | Eureka | Spring Security | Docker**
+
+```
+

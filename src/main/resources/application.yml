@@ -35,9 +35,9 @@ server:
 
 # Razorpay
 razorpay:
-    key-id: rzp_test_TgxUyQjSijyKgn
-    key-secret: B5hs7nw6GC4ySi24pa9L19xt
-    webhook-secret: SKKANDFJJN34234SDFN
+    key-id: *********************
+    key-secret: *******************
+    webhook-secret: *****************
 
 # Resilience4j
 resilience4j:
